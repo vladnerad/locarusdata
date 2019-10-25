@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 public class App {
     public static void main(String[] args) {
 
+//        System.out.println(DataParser.getNumberFromByte(15673, 0, 8) - 40);
+//        System.out.println(DataParser.getNumberFromByte(15673, 8, 8) - 40);
+
         String locarusNum = "";
         String from = "";
         String to = "";
