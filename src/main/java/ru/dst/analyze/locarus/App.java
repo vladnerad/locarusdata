@@ -24,29 +24,18 @@ public class App {
             e.printStackTrace();
         }
 
-        ObjectMapper mapper = new ObjectMapper();
-        String response = new JsonHelper(locarusNum, from, to).getJson(); /*getJson(locarusNum, from, to);*/
-//        System.out.println(response);
+        Message message = new JsonHelper(locarusNum, from, to).getMessage();
 
-        if (response != null && !response.equals("")) {
-            try {
-                Message message = mapper.readValue(response, Message.class);
-                if (message != null) {
-                    int[] arr = DataParser.getIntegerArray(message, 11);
-                    int[] arr2 = DataParser.getIntegerArray(message, 12);
-                    int[] arr3 = DataParser.getIntegerArray(message, 7);
-                    if (arr != null && arr2 != null && arr3 != null) {
-                        System.out.println("Array length is " + arr.length);
-                        DataAnalyzer.analyzeErrors(arr, 0);
-                        DataAnalyzer.analyzeErrors(arr2, 1);
-                        DataAnalyzer.analyzeErrors(arr3, 2);
-                    }
-                } else System.out.println("Message is null");
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (message != null) {
+            int[] arr = DataParser.getIntegerArray(message, 11);
+            int[] arr2 = DataParser.getIntegerArray(message, 12);
+            int[] arr3 = DataParser.getIntegerArray(message, 7);
+            if (arr != null && arr2 != null && arr3 != null) {
+                System.out.println("Array length is " + arr.length);
+                DataAnalyzer.analyzeErrors(arr, 0);
+                DataAnalyzer.analyzeErrors(arr2, 1);
+                DataAnalyzer.analyzeErrors(arr3, 2);
             }
-        } else {
-            System.out.println("Empty response");
-        }
+        } else System.out.println("Message is null");
     }
 }
