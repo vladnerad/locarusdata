@@ -9,21 +9,24 @@ import java.util.Base64;
 public class JsonHelper {
 
     private static final String USER_CREDENTIALS = "dst_ural:dst_ural";
-    private String locarusNum;
-    private String fromDate;
-    private String toDate;
+//    private String locarusNum;
+//    private String fromDate;
+//    private String toDate;
+    private String url;
 
     public JsonHelper(String locarusNum, String fromDate, String toDate) {
-        this.locarusNum = locarusNum;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+//        this.locarusNum = locarusNum;
+//        this.fromDate = fromDate;
+//        this.toDate = toDate;
+
+        this.url = String.format(
+                "http://lserver3.ru:8091/do.locator?q=track&imei=%s&mode=full&filter=false&from=%sT00:00:00Z&to=%sT00:00:00Z",
+                locarusNum, fromDate, toDate);
     }
 
     private String basicAuth = "Basic " + new String(Base64.getEncoder().encode(USER_CREDENTIALS.getBytes()));
 
-    private String url = String.format(
-            "http://lserver3.ru:8091/do.locator?q=track&imei=%s&mode=full&filter=false&from=%sT00:00:00Z&to=%sT00:00:00Z",
-            locarusNum, fromDate, toDate);
+
 
     public String getJson(){
         try {
