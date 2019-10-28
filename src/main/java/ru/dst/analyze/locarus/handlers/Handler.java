@@ -5,7 +5,7 @@ public abstract class Handler {
     private String name;
     private int startBit;
     private int length;
-    private int multiply;
+    private double multiply;
     private int shift;
 
 //    public Handler(String name, int startBit, int length, int multiply, int shift) {
@@ -28,7 +28,7 @@ public abstract class Handler {
         return length;
     }
 
-    public int getMultiply() {
+    public double getMultiply() {
         return multiply;
     }
 

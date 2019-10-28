@@ -47,7 +47,7 @@ public class RightPressHandler extends Handler {
     }
 
     @Override
-    public int getMultiply() {
+    public double getMultiply() {
         return multiply;
     }
 

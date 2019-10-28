@@ -3,7 +3,6 @@ package ru.dst.analyze.locarus;
 import ru.dst.analyze.locarus.handlers.Handler;
 import ru.dst.analyze.locarus.response.Message;
 
-import java.util.Collections;
 import java.util.Map;
 
 public class DataParser {
@@ -50,7 +49,7 @@ public class DataParser {
             int o = (bits[bits.length - handler.getStartBit() - 1 - z] ? 1 : 0) << z;
             result = result | o;
         }
-        return result * handler.getMultiply() + handler.getShift();
+        return (int) (result * handler.getMultiply()) + handler.getShift();
     }
 
     public static int[][] getDataArray(Message message) {

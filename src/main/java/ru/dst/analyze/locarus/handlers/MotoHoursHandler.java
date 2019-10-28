@@ -1,30 +1,30 @@
 package ru.dst.analyze.locarus.handlers;
 
-public class LeftPressHandler extends Handler {
+public class MotoHoursHandler extends Handler {
     //must be Singleton
-    private static volatile LeftPressHandler instance;
+    private static volatile MotoHoursHandler instance;
 
     private String name;
     private int startBit;
     private int length;
-    private int multiply;
+    private double multiply;
     private int shift;
 
-    private LeftPressHandler() {
-        name = "Left pump pressure";
+    private MotoHoursHandler() {
+        name = "Moto Hours";
         startBit = 0;
-        length = 10;
-        multiply = 1;
+        length = 32;
+        multiply = 0.1;
         shift = 0;
     }
 
-    public static LeftPressHandler getInstance(){
-        LeftPressHandler result = instance;
+    public static MotoHoursHandler getInstance(){
+        MotoHoursHandler result = instance;
         if (result == null) {
-            synchronized (LeftPressHandler.class) {
+            synchronized (MotoHoursHandler.class) {
                 result = instance;
                 if (result == null) {
-                    instance = result = new LeftPressHandler();
+                    instance = result = new MotoHoursHandler();
                 }
             }
         }

@@ -59,7 +59,7 @@ public class App {
             CSVWriter writer = new CSVWriter("C:\\Users\\vpriselkov\\Desktop\\test.csv");
             int[][] data = DataParser.getDataArray(message);
             for (int i = 0; i < data.length; i++) {
-                writer.writeJsonLine(data[i]);
+                writer.writeJsonLine(DataHandler.convertData(data[i]));
             }
             try {
                 writer.close();

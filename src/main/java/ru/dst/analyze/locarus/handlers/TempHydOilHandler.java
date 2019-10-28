@@ -1,30 +1,30 @@
 package ru.dst.analyze.locarus.handlers;
 
-public class LeftPressHandler extends Handler {
+public class TempHydOilHandler extends Handler {
     //must be Singleton
-    private static volatile LeftPressHandler instance;
+    private static volatile TempHydOilHandler instance;
 
     private String name;
     private int startBit;
     private int length;
-    private int multiply;
+    private double multiply;
     private int shift;
 
-    private LeftPressHandler() {
-        name = "Left pump pressure";
+    private TempHydOilHandler() {
+        name = "Hydraulic oil temperature";
         startBit = 0;
-        length = 10;
+        length = 8;
         multiply = 1;
-        shift = 0;
+        shift = -40;
     }
 
-    public static LeftPressHandler getInstance(){
-        LeftPressHandler result = instance;
+    public static TempHydOilHandler getInstance(){
+        TempHydOilHandler result = instance;
         if (result == null) {
-            synchronized (LeftPressHandler.class) {
+            synchronized (TempHydOilHandler.class) {
                 result = instance;
                 if (result == null) {
-                    instance = result = new LeftPressHandler();
+                    instance = result = new TempHydOilHandler();
                 }
             }
         }
