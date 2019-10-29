@@ -3,7 +3,10 @@ package ru.dst.analyze.locarus;
 import ru.dst.analyze.locarus.handlers.Handler;
 import ru.dst.analyze.locarus.response.Message;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class DataParser {
 
@@ -66,5 +69,44 @@ public class DataParser {
             System.out.println(message.getDescription());
             return null;
         }
+    }
+
+    public static Set<Integer> getErrors(int errPack1, int errPack2, int errPack3){
+        Set<Integer> result = new TreeSet<>();
+        result.addAll(getErrorsFromNumber(errPack1, 1));
+        result.addAll(getErrorsFromNumber(errPack2, 2));
+        result.addAll(getErrorsFromNumber(errPack3, 3));
+        return result;
+    }
+
+    public static Set<Integer> getErrorsFromNumber(int n, int errPackNum){
+        Set<Integer> result = new HashSet<>();
+        boolean[] bits = new boolean[32];
+        for (int i = 31; i >= 0; i--) {
+            bits[i] = (n & (1 << i)) != 0;
+        }
+        for (int i = 0; i < bits.length; i++) {
+            if (bits[i]) {
+                if(errPackNum == 1) result.add(i + 1);
+                else if (errPackNum == 2) result.add(i + 33);
+                else if (errPackNum == 3) result.add(i + 65);
+                else System.out.println("getErrorsFromNumber error");
+            }
+        }
+        return result;
+    }
+
+    public static String errorsToString(Set<Integer> errors){
+        StringBuilder sb = new StringBuilder("");
+        for(Integer i: errors){
+            sb.append(i).append(":");
+        }
+        if(sb.length() > 0){
+            sb.setLength(sb.length()-1);
+        }
+        else {
+            sb.append("no errors");
+        }
+        return sb.toString();
     }
 }

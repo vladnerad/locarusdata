@@ -30,15 +30,20 @@ public class CSVWriter {
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < numbers.length; i++) {
             result.append(numbers[i]);
-            if (i != numbers.length - 1) {
+//            if (i != numbers.length - 1) {
                 result.append(",");
-            }
+//            }
         }
         return result.toString();
     }
 
     public void writeJsonLine(int[] numbers) {
-        writeLine(arrToString(numbers));
+//        writeLine(arrToString(numbers));
+        try {
+            fileWriter.write(arrToString(numbers));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void close() throws IOException {
