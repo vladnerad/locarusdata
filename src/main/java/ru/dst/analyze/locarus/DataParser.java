@@ -24,19 +24,19 @@ public class DataParser {
         }
     }
 
-//    public static int getNumberFromByte(int number, int startBit, int length){
-//        boolean[] bits = new boolean[32];
-//        for (int i = 0; i < 32; i++) {
-//            bits[31 - i] = (number & (1 << i)) != 0;
-//        }
-////        System.out.println(Arrays.toString(bits));
-//        int result = bits[bits.length - startBit - 1] ? 1 : 0;
-//        for (int z = 1; z < length; z++) {
-//            int o = (bits[bits.length - startBit - 1 - z] ? 1 : 0) << z;
-//            result = result | o;
-//        }
-//        return result;
-//    }
+    public static int getNumberFromByte(int number, int startBit, int length){
+        boolean[] bits = new boolean[32];
+        for (int i = 0; i < 32; i++) {
+            bits[31 - i] = (number & (1 << i)) != 0;
+        }
+//        System.out.println(Arrays.toString(bits));
+        int result = bits[bits.length - startBit - 1] ? 1 : 0;
+        for (int z = 1; z < length; z++) {
+            int o = (bits[bits.length - startBit - 1 - z] ? 1 : 0) << z;
+            result = result | o;
+        }
+        return result;
+    }
 
     public static int getNumberFromByte(int number, Handler handler) {
         boolean[] bits = new boolean[32];

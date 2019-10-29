@@ -7,8 +7,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+//need to work with date as ID of string data;
+//need to process digital inputs;
+//need to process all errors;
 public class App {
     public static void main(String[] args) {
+
+//        System.out.println(JoyAttachHandler.getForwRev(411303936));
+//        System.out.println(JoyAttachHandler.getLeftRight(411303936));
 
 //        CSVWriter writer = new CSVWriter("C:\\Users\\vpriselkov\\Desktop\\test.csv");
 //        writer.writeLine("1,2,3,4,5,6,7");
