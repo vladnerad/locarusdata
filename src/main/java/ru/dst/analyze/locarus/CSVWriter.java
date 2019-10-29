@@ -31,7 +31,7 @@ public class CSVWriter {
         for (int i = 0; i < numbers.length; i++) {
             result.append(numbers[i]);
 //            if (i != numbers.length - 1) {
-                result.append(",");
+            result.append(",");
 //            }
         }
         return result.toString();
@@ -50,6 +50,15 @@ public class CSVWriter {
         fileWriter.write("end_file");
         fileWriter.flush();
         fileWriter.close();
+    }
+
+    public void writeTime(String time) {
+        try {
+            fileWriter.write(time);
+            fileWriter.write(",");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

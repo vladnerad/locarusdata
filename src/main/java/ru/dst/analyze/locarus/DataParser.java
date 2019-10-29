@@ -1,7 +1,9 @@
 package ru.dst.analyze.locarus;
 
 import ru.dst.analyze.locarus.handlers.Handler;
+import ru.dst.analyze.locarus.response.Data;
 import ru.dst.analyze.locarus.response.Message;
+import ru.dst.analyze.locarus.response.Time;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -27,12 +29,11 @@ public class DataParser {
         }
     }
 
-    public static int getNumberFromByte(int number, int startBit, int length){
+    public static int getNumberFromByte(int number, int startBit, int length) {
         boolean[] bits = new boolean[32];
         for (int i = 0; i < 32; i++) {
             bits[31 - i] = (number & (1 << i)) != 0;
         }
-//        System.out.println(Arrays.toString(bits));
         int result = bits[bits.length - startBit - 1] ? 1 : 0;
         for (int z = 1; z < length; z++) {
             int o = (bits[bits.length - startBit - 1 - z] ? 1 : 0) << z;
@@ -71,7 +72,16 @@ public class DataParser {
         }
     }
 
-    public static Set<Integer> getErrors(int errPack1, int errPack2, int errPack3){
+    public static String[] getTimeArr(Message message) {
+        if (message.getDescription() == null) {
+            return message.getResult().getData().stream().map(Data::getTime).map(Time::toString).map(s -> s.replaceAll("T", " ")).map(s -> s.replaceAll("\\.000Z", "")).toArray(String[]::new);
+        } else {
+            System.out.println(message.getDescription());
+            return null;
+        }
+    }
+
+    public static Set<Integer> getErrors(int errPack1, int errPack2, int errPack3) {
         Set<Integer> result = new TreeSet<>();
         result.addAll(getErrorsFromNumber(errPack1, 1));
         result.addAll(getErrorsFromNumber(errPack2, 2));
@@ -79,7 +89,7 @@ public class DataParser {
         return result;
     }
 
-    public static Set<Integer> getErrorsFromNumber(int n, int errPackNum){
+    public static Set<Integer> getErrorsFromNumber(int n, int errPackNum) {
         Set<Integer> result = new HashSet<>();
         boolean[] bits = new boolean[32];
         for (int i = 31; i >= 0; i--) {
@@ -87,7 +97,7 @@ public class DataParser {
         }
         for (int i = 0; i < bits.length; i++) {
             if (bits[i]) {
-                if(errPackNum == 1) result.add(i + 1);
+                if (errPackNum == 1) result.add(i + 1);
                 else if (errPackNum == 2) result.add(i + 33);
                 else if (errPackNum == 3) result.add(i + 65);
                 else System.out.println("getErrorsFromNumber error");
@@ -96,15 +106,14 @@ public class DataParser {
         return result;
     }
 
-    public static String errorsToString(Set<Integer> errors){
+    public static String errorsToString(Set<Integer> errors) {
         StringBuilder sb = new StringBuilder("");
-        for(Integer i: errors){
+        for (Integer i : errors) {
             sb.append(i).append(":");
         }
-        if(sb.length() > 0){
-            sb.setLength(sb.length()-1);
-        }
-        else {
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 1);
+        } else {
             sb.append("no errors");
         }
         return sb.toString();
