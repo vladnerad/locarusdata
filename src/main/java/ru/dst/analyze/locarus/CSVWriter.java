@@ -18,12 +18,8 @@ public class CSVWriter {
         }
     }
 
-    public void writeLine(String line) {
-        try {
-            fileWriter.write(line + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void writeLine(String line) throws IOException {
+        fileWriter.write(line + "\n");
     }
 
     public String arrToString(int[] numbers) {
@@ -37,13 +33,9 @@ public class CSVWriter {
         return result.toString();
     }
 
-    public void writeJsonLine(int[] numbers) {
+    public void writeJsonLineFromIntArray(int[] numbers) throws IOException {
 //        writeLine(arrToString(numbers));
-        try {
-            fileWriter.write(arrToString(numbers));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileWriter.write(arrToString(numbers));
     }
 
     public void close() throws IOException {
@@ -52,13 +44,12 @@ public class CSVWriter {
         fileWriter.close();
     }
 
-    public void writeTime(String time) {
-        try {
-            fileWriter.write(time);
-            fileWriter.write(",");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void writeTime(String time) throws IOException {
+        fileWriter.write(time);
+        fileWriter.write(",");
     }
 
+    public FileWriter getFileWriter() {
+        return fileWriter;
+    }
 }

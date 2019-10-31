@@ -1,7 +1,11 @@
 package ru.dst.analyze.locarus;
 
+import ru.dst.analyze.locarus.response.Data;
+import ru.dst.analyze.locarus.response.Message;
+
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DataAnalyzer {
 
@@ -23,4 +27,11 @@ public class DataAnalyzer {
         }
         System.out.println(allErrors);
     }
+
+//    public static void analyzeDigitalIn(Message message){
+//        Set<String> allDidIn =  message.getResult().getData().stream().map(Data::getDigitalIn).collect(Collectors.toSet());
+//        for (String s: allDidIn){
+//            System.out.println(s);
+//        }
+//    }
 }

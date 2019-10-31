@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Map;
 
 @JsonIgnoreProperties({ "referenceID", "navigationID", "objectID", "objectType", "dist", "mileage", "voltage",
-        "message", "extra", "nativeFlags", "digitalIn", "generalListIn", "Coords", "Filter", "Flags", "Satellites",
+        "message", "extra", "nativeFlags", "generalListIn", "Coords", "Filter", "Flags", "Satellites",
         "framePacket"})
 public class Data {
     private Time time;
@@ -19,7 +19,7 @@ public class Data {
 //    private String message;
 //    private List<String> extra;
 //    private String nativeFlags;
-//    private String digitalIn;
+    private String digitalIn;
     private Map<String, Double> analogIn;
 //    private List<String> generalListIn;
 //    private List<String> Coords;
@@ -42,5 +42,13 @@ public class Data {
 
     public void setAnalogIn(Map<String, Double> analogIn) {
         this.analogIn = analogIn;
+    }
+
+    public String getDigitalIn() {
+        return digitalIn;
+    }
+
+    public void setDigitalIn(String digitalIn) {
+        this.digitalIn = digitalIn;
     }
 }

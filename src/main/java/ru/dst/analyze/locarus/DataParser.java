@@ -118,4 +118,33 @@ public class DataParser {
         }
         return sb.toString();
     }
+
+    public static boolean[] getDigitalInputs(String digIn){
+        boolean[] result = new boolean[8];
+        long digInLong = Long.parseLong(digIn);
+        if(digInLong > 0){
+            System.out.println("error getDigitalInputs");
+            return null;
+        }
+        else {
+            int n = (int) (4294967295L + digInLong + 1) >> 7;
+            for (int i = 7; i >= 0; i--) {
+                result[i] = (n & (1 << i)) != 0;
+            }
+        }
+        return result;
+    }
+
+    public static boolean[][] getDigitalInData(Message message){
+        boolean[][] result = new boolean[message.getResult().getData().size()][8];
+        if (message.getDescription() == null) {
+            for (int i = 0; i < result.length; i++) {
+                result[i] = getDigitalInputs(message.getResult().getData().get(i).getDigitalIn());
+            }
+            return result;
+        } else {
+            System.out.println(message.getDescription());
+            return null;
+        }
+    }
 }

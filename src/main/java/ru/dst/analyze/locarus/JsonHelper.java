@@ -26,7 +26,7 @@ public class JsonHelper {
 //        this.toDate = toDate;
 
         this.url = String.format(
-                "http://lserver3.ru:8091/do.locator?q=track&imei=%s&mode=full&filter=false&from=%sT00:00:00Z&to=%sT00:00:00Z",
+                "http://lserver3.ru:8091/do.locator?q=track&imei=%s&mode=full&filter=false&from=%sT00:00:00Z&to=%sT23:59:59Z",
                 locarusNum, fromDate, toDate);
 
         mapper = new ObjectMapper();
